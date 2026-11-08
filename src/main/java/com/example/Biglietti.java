@@ -22,5 +22,30 @@ public class Biglietti {
     public int getParterre() {
         return parterre;
     }
-    
+    public synchronized boolean acquista(String tipo,int quantità)throws Exception{
+        if(tipo.equalsIgnoreCase("Gold")){
+            if(this.gold<quantità){
+                return false;
+            }else{
+                this.gold-=quantità;
+                return true;
+            }
+        }else if(tipo.equalsIgnoreCase("Pit")){
+            if(this.pit<quantità){
+                return false;
+            }else{
+                this.pit-=quantità;
+                return true;
+            }
+        }else if(tipo.equalsIgnoreCase("parterre")){
+            if(this.parterre<quantità){
+                return false;
+            }else{
+                this.parterre-=quantità;
+                return true;
+            }
+        }else{
+            throw new Exception("tipo non valido");
+        }
+    }
 }
